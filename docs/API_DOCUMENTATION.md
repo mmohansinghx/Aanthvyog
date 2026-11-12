@@ -3,6 +3,8 @@
 **Status:** In Design
 **API state:** proposed contract only; no endpoints are implemented or tested. The local frontend's request preview does not call a server or API.
 
+> **Phase 2A authority:** The endpoint catalogue, payload limits, authentication/ownership requirements, idempotency, concurrency, error mapping, and request/spec/task/approval/identity/export/deletion contracts in [Phase 2A API Contracts](PHASE_2A_API_CONTRACTS.md) supersede this earlier M1 endpoint sketch where details differ. This page is retained as historical M1 context and is not an implementation reference until aligned. No endpoint is live or tested.
+
 ## Contract rules
 
 - Require a real authenticated session/token at every protected API boundary. Frontend route guards improve UX only and never authorize an operation.

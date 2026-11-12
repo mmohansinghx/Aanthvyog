@@ -16,11 +16,17 @@ export type DemoProject = {
   updated: string;
   ownerLabel: string;
   request: {
+    applicationType: string;
     objective: string;
     audience: string;
     features: string[];
+    authentication: string;
+    database: string;
+    preferredTechnology: string;
+    additionalRequirements: string;
     constraints: string[];
     specificationVersion: number;
+    reviewQuestions: string[];
   };
   activity: Array<{
     id: string;
@@ -41,6 +47,7 @@ export const demoProjects: DemoProject[] = [
     updated: "Sample · 12 Nov",
     ownerLabel: "Demo owner",
     request: {
+      applicationType: "Internal web application",
       objective:
         "Bring studio bookings and follow-up work into one clear view so the team can see what needs attention.",
       audience: "A small studio team coordinating schedules and customer requests.",
@@ -49,11 +56,19 @@ export const demoProjects: DemoProject[] = [
         "Simple request intake form",
         "Follow-up list with due dates",
       ],
+      authentication: "Team sign-in · planned",
+      database: "Booking and follow-up records · planned",
+      preferredTechnology: "Not selected",
+      additionalRequirements: "Show calendar invites as an optional follow-up after a booking is confirmed.",
       constraints: [
         "Keep the first version focused on desktop and mobile web.",
         "Do not connect to payment systems.",
       ],
       specificationVersion: 3,
+      reviewQuestions: [
+        "Which team roles may create or cancel a booking?",
+        "Should customers receive a confirmation after a request?",
+      ],
     },
     activity: [
       {
@@ -87,12 +102,20 @@ export const demoProjects: DemoProject[] = [
     updated: "Sample · 11 Nov",
     ownerLabel: "Demo owner",
     request: {
+      applicationType: "Directory website",
       objective:
         "Make it easier to browse a curated list of quiet places and understand what each place offers.",
       audience: "People looking for a calm place to read or work for a while.",
       features: ["Search by area", "Place detail cards", "Accessibility notes"],
+      authentication: "Not required for this concept",
+      database: "Place listings · planned",
+      preferredTechnology: "Not selected",
+      additionalRequirements: "Keep accessibility information easy to find.",
       constraints: ["No user location tracking in the first version."],
       specificationVersion: 1,
+      reviewQuestions: [
+        "How will a place be reviewed before appearing in the directory?",
+      ],
     },
     activity: [
       {

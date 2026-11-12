@@ -3,6 +3,10 @@
 **Status:** In Design
 **Policy state:** requirements for future implementation; controls are not deployed or tested.
 
+## Phase 2A threat model
+
+The attack-surface review and required validation/evidence are now detailed in [Phase 2A Security Threat Model](PHASE_2A_SECURITY_THREAT_MODEL.md). The accompanying [API contracts](PHASE_2A_API_CONTRACTS.md), [approval design](PHASE_2A_APPROVAL_DESIGN.md), and [QA strategy](PHASE_2A_QA_STRATEGY.md) define owner checks, stale-approval controls and negative tests. These are requirements only; they do not establish that the preview or a future backend is secure. Key blockers include proving user identity in the current Catalyst Function SDK context, owner-filtered data access, and atomic state/audit writes.
+
 ## Security decision state
 
 - **Founder Approved (2026-11-12):** real authentication with invite-only access; real persistent core records; India as intended region.

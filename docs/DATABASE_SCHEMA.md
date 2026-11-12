@@ -3,6 +3,8 @@
 **Status:** In Design
 **Schema state:** logical contract version 1 proposal only; no Catalyst project, tables, migrations, or persisted application records exist.
 
+> **Phase 2A authority:** The schema below is the earlier M1 conceptual proposal. The expanded logical schema, Catalyst type/limit mapping, ownership columns for all 12 proposed entities, retention rules, and transaction/uniqueness verification gates are in [Phase 2A Database Design](PHASE_2A_DATABASE_DESIGN.md). That design is authoritative for the next review; the Catalyst schema is still unimplemented and not account-verified. Do not create tables from either document until the technical proof and required founder authorization are complete.
+
 ## Decision and evidence state
 
 - **Founder Approved (2026-11-12):** real persistence for identity references, projects, project requests, task lifecycle, approvals, and audit events.

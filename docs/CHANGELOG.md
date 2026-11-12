@@ -2,6 +2,21 @@
 
 All notable changes to the AANTVYOG foundation package are recorded here.
 
+## 2026-11-12 - Premium frontend UI refresh
+- Updated the landing page, workspace shell, dashboard, structured request builder, project brief, approval preview, activity timeline, and access-status page with a cohesive responsive design system.
+- Added local workflow, task-board, and planned agent-role previews; clearly marked example content and kept approval actions disabled.
+- Expanded the browser-only request schema and validation for application type, product outcome, audience, requirements, authentication/data needs, preferred technology, constraints, and additional context.
+- Kept demo fixtures in browser/static UI only. No authentication, persistence, API, Catalyst integration, or AI execution was added.
+- Verified with `npm run lint`, `npm run typecheck`, `npm test` (3 files / 6 tests), and `npm run build`. Loaded all seven routes in headless Chromium at 320, 390, 768, and 1440 CSS pixels; no document-width overflow was measured.
+- No dependency versions changed. No deployment or GitHub publication was performed.
+
+## 2026-11-12 - Phase 2A backend architecture blueprint
+- Added nine documentation-only architecture/design records covering backend components, normalized database model, versioned API, threat model, task lifecycle, spec-hash approval, independent QA, cost/dependency review, and implementation roadmap.
+- Updated README, Project Master, system architecture, legacy database/API drafts, security policy, testing strategy, decision register, and technology registry with authority links and evidence status.
+- Verified current public Catalyst documentation for India DC domains, Functions Node 24/22, Slate Next.js support, Authentication invitations/public-signup controls, Data Store field/query limits, modular JavaScript SDK and legacy SDK deprecation, and shared-quota/overage/minimum-billing risks.
+- Marked actual-account facts, SDK/auth context, Data Store atomic transaction/CAS behavior, billing state and component-level data residency UNVERIFIED. These remain implementation gates.
+- No application code, tests, dependencies, Catalyst CLI/project, remote service, account setting, payment method or deployment was created/changed in this phase. The source prompt attachment ended mid quality-gate checklist; no missing text was invented.
+
 ## 2026-11-12 - Local M1 frontend foundation
 - Founder authorized a local-only Next.js App Router, TypeScript, and Tailwind implementation and a checksum-verified side-by-side Node.js 24.22.3 runtime; the system Node installation and machine-wide PATH were left unchanged.
 - Added the responsive landing page, dashboard, structured request preview, project workspace/status tracker, disabled approval actions, static activity timeline, explicit no-agent state, and access-status page.

@@ -35,6 +35,22 @@ These are separate evidence states, not automatic steps. A decision may be Found
 | Account model | Individual account; one `owner_user_id` per project; server-side owner validation; workspace migration later. | Proposed implementation constraint | Verify server credentials, token claims, and data-access patterns preserve ownership. | No / no. |
 | AI/execution | No model calls, provider config, or generated-code execution in M1. | M1 exclusion | No integration evaluation for M1. | None / none. |
 
+## Phase 2A public-documentation verification (no new founder approvals)
+
+Reviewed official Catalyst public docs on 2026-11-12 for the architecture blueprint. These findings verify published documentation only; they do not verify the founder's account, an initialized project, actual service settings, or implementation.
+
+| Subject | Public-doc finding and status | Account/implementation evidence |
+|---|---|---|
+| India data center | **Technically Verified (public docs):** India is listed as a Catalyst data center with India-specific API and Accounts domains. | Actual account domain/DC, project region, each component's availability, processing/storage/backup locations remain UNVERIFIED. |
+| Invite-only authentication | **Technically Verified (public docs):** public signup is documented as disabled by default; administrator user invitations, password setup and reset are documented. | Actual settings, exact current SDK/browser session verification, invitation expiry/revocation, delivery, recovery and billing remain UNVERIFIED. |
+| Function runtime | **Technically Verified (public docs):** Node 24 and Node 22 are listed. | Runtime behavior and Functions availability in the actual India account are UNVERIFIED; no Function exists. |
+| Slate | **Technically Verified (public docs):** Slate advertises native Next.js support and Next.js-specific memory settings. | Next App Router SSR, runtime, route behavior, quota/cost and India account availability remain UNVERIFIED; no deployment exists. |
+| Data Store | **Technically Verified (public docs):** relational records, ROWID/default columns, documented column types, foreign keys, ZCQL and table scopes are described. Public docs state 100 columns/table by default, Text up to 10,000 characters, Var Char up to 255, and query/join limits. | Exact account schema/query/unique/index/deletion behavior and required transaction, rollback, conditional-write/CAS, isolation and audit consistency are UNVERIFIED. These are implementation blockers. |
+| SDK lifecycle | **Technically Verified (public release notes):** the modular JavaScript SDK became generally available in September 2026; Catalyst states that Node.js SDK v2 and Web SDK v4 entered deprecation on 2026-10-01 with support end planned 2027-10-01. | Exact package/module versions, license, Node 24 Function runtime, Next bundling and auth-context behavior remain UNVERIFIED; no dependency added. Modular JS SDK is Proposed for evaluation, not Founder Approved or Implemented. |
+| Cost | **Technically Verified (public docs):** allowances are shared account-wide; pay-as-you-go overage may be billable; development usage counts; project minimum billing risk is documented. | Actual billing mode, remaining quotas, alerts, payment settings and zero-spend feasibility are UNVERIFIED. No service has been used. |
+
+Architecture proposals and gates are recorded in [Phase 2A Architecture](PHASE_2A_ARCHITECTURE.md), [Database Design](PHASE_2A_DATABASE_DESIGN.md), [API Contracts](PHASE_2A_API_CONTRACTS.md), and [Cost and Dependency Review](PHASE_2A_COST_AND_DEPENDENCY_REVIEW.md). No decision in those documents is Founder Approved unless explicitly identified as one of decisions 001–004 above.
+
 ## Local-only implementation authorization and evidence
 
 On 2026-11-12 the founder authorized a local-only frontend foundation, a side-by-side Node.js `24.22.3` runtime after official checksum verification, and local unit/component tests. The authorization excludes global Catalyst CLI installation, Catalyst initialization/login, remote Catalyst projects/tables/accounts, paid services, payment methods, overage, production deployment, fake authentication, live AI calls, and generated-code execution.

@@ -3,6 +3,10 @@
 **Status:** In Design
 **Test evidence:** local UI tests exist and pass for the demo preview. No backend, authentication, ownership, persistence, or provider integration tests have been run.
 
+## Phase 2A QA authority
+
+The complete independent test matrix for authentication, ownership/IDOR, CRUD, schema boundaries, task transitions, approvals/hash integrity, audit events, cancellation, provider failures, export/deletion, accessibility/mobile, concurrency and cost gates is in [Phase 2A QA Strategy](PHASE_2A_QA_STRATEGY.md). It is a future test plan only. Prior frontend checks below remain limited to the local fixture preview; no Phase 2A backend test was run or marked passed.
+
 ## Local frontend preview evidence (2026-11-12)
 
 | Check | Result | Scope |

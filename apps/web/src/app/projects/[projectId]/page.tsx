@@ -2,9 +2,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ProductShell } from "@/components/product-shell";
 import { ArrowIcon, PageHeading, StatusPill } from "@/components/ui";
-import { getDemoProject } from "@/lib/demo-data";
+import { AgentRolePreviews, TaskBoardPreview } from "@/components/preview-cards";
+import { getDemoProject, type ProjectStatus } from "@/lib/demo-data";
 
-function stageForStatus(status: string) {
+function stageForStatus(status: ProjectStatus) {
   if (status === "draft") return 0;
   if (status === "requirements") return 1;
   if (status === "awaiting_approval") return 2;
@@ -34,10 +35,15 @@ export default async function ProjectWorkspacePage({ params }: { params: Promise
       <div className="workspace-grid">
         <section className="panel brief-panel">
           <div className="panel-heading"><div><p className="eyebrow">STRUCTURED REQUEST</p><h2>The brief at a glance</h2></div><span className="version-chip">SPEC v{project.request.specificationVersion}</span></div>
+          <div className="brief-field"><span className="brief-label">APPLICATION TYPE</span><p>{project.request.applicationType}</p></div>
           <div className="brief-field"><span className="brief-label">INTENDED OUTCOME</span><p>{project.request.objective}</p></div>
           <div className="brief-field"><span className="brief-label">WHO IT IS FOR</span><p>{project.request.audience}</p></div>
           <div className="brief-field"><span className="brief-label">KEY REQUIREMENTS</span><ul className="check-list">{project.request.features.map((feature) => <li key={feature}><span aria-hidden="true">✓</span>{feature}</li>)}</ul></div>
           <div className="brief-field"><span className="brief-label">CONSTRAINTS</span><ul className="constraint-list">{project.request.constraints.map((constraint) => <li key={constraint}>{constraint}</li>)}</ul></div>
+          <div className="brief-field"><span className="brief-label">AUTHENTICATION NEED</span><p>{project.request.authentication}</p></div>
+          <div className="brief-field"><span className="brief-label">DATA NEED</span><p>{project.request.database}</p></div>
+          <div className="brief-field"><span className="brief-label">ADDITIONAL CONTEXT</span><p>{project.request.additionalRequirements}</p></div>
+          <div className="brief-field"><span className="brief-label">OPEN REVIEW QUESTIONS</span><ul className="constraint-list">{project.request.reviewQuestions.map((question) => <li key={question}>{question}</li>)}</ul></div>
           <div className="brief-bottom-note"><span className="info-mark">i</span>Example specification only. No user data is stored.</div>
         </section>
 
@@ -53,6 +59,12 @@ export default async function ProjectWorkspacePage({ params }: { params: Promise
           <section className="small-detail-card"><span className="eyebrow">PROJECT DETAILS</span><div className="detail-line"><span>Owner</span><strong>{project.ownerLabel}</strong></div><div className="detail-line"><span>Updated</span><strong>{project.updated}</strong></div><div className="detail-line"><span>Specification</span><strong>Version {project.request.specificationVersion}</strong></div></section>
         </aside>
       </div>
+
+      <TaskBoardPreview />
+      <section className="agent-preview-section">
+        <div className="section-intro"><p className="eyebrow">INTENDED SPECIALIST ROLES</p><h2>Planned collaboration, clearly handed off.</h2><p>Role cards illustrate the proposed workflow. There are no connected agents or active runs.</p></div>
+        <AgentRolePreviews />
+      </section>
     </ProductShell>
   );
 }

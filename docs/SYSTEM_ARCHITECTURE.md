@@ -3,6 +3,10 @@
 **Status:** In Design
 **Architecture state:** the local-only frontend preview is implemented; no connected backend, authentication, persistence, or Catalyst project is implemented.
 
+## Phase 2A authority
+
+The detailed architecture proposal and service/authentication evaluation now live in [Phase 2A Architecture](PHASE_2A_ARCHITECTURE.md). The authoritative proposed schema, endpoints, lifecycle, approvals, security and delivery gates are [database design](PHASE_2A_DATABASE_DESIGN.md), [API contracts](PHASE_2A_API_CONTRACTS.md), [task lifecycle](PHASE_2A_TASK_LIFECYCLE.md), [approval design](PHASE_2A_APPROVAL_DESIGN.md), [security threat model](PHASE_2A_SECURITY_THREAT_MODEL.md), [QA strategy](PHASE_2A_QA_STRATEGY.md), [cost/dependency review](PHASE_2A_COST_AND_DEPENDENCY_REVIEW.md), and [roadmap](PHASE_2A_IMPLEMENTATION_ROADMAP.md). This file retains the M1 context; where details conflict, Phase 2A contracts supersede earlier proposals. No backend/service is implemented by these documents.
+
 ## Decision status
 
 - **Founder Approved (2026-11-12):** India is the intended data region; authentication must be real and invite-only; core platform records must use real persistence.
@@ -77,7 +81,7 @@ No remote Catalyst project is authorized for creation yet. A checksum-verified N
 
 ## Reliability and API behavior
 
-Persist a state transition and corresponding audit event atomically where the chosen store allows; otherwise use an idempotent write/reconciliation design. Use idempotency keys and version checks for retries/concurrent updates. Bound request size, pagination, execution time, retries, and usage. Cancellation prevents later lifecycle work from starting and records actor/time/reason. Return a stable error code, safe message, correlation ID, and only sanitized field-level details.
+Persist a state transition and corresponding audit event under a verified atomic-write or approved consistency strategy. Catalyst Data Store transaction/rollback and conditional compare-and-set guarantees required here remain unverified; do not assume read-then-write plus reconciliation is sufficient for approval or ownership state. Use idempotency keys and version checks only after provider semantics are tested. Bound request size, pagination, execution time, retries, and usage. Cancellation prevents later lifecycle work from starting and records actor/time/reason. Return a stable error code, safe message, correlation ID, and only sanitized field-level details.
 
 ## Unresolved technical checks
 

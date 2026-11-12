@@ -22,9 +22,14 @@ export default async function ApprovalPreviewPage({ params }: { params: Promise<
       <div className="approval-layout">
         <section className="panel approval-spec-panel">
           <div className="spec-heading"><div><span className="eyebrow">SPECIFICATION UNDER REVIEW</span><h2>{project.name}</h2><p>Specification version {project.request.specificationVersion}</p></div><span className="version-chip">v{project.request.specificationVersion}</span></div>
+          <div className="spec-summary"><span className="brief-label">APPLICATION TYPE</span><p>{project.request.applicationType}</p></div>
           <div className="spec-summary"><span className="brief-label">OUTCOME</span><p>{project.request.objective}</p></div>
+          <div className="spec-summary"><span className="brief-label">INTENDED USERS</span><p>{project.request.audience}</p></div>
           <div className="spec-review-columns"><div><span className="brief-label">INCLUDED</span><ul className="check-list">{project.request.features.map((feature) => <li key={feature}><span aria-hidden="true">✓</span>{feature}</li>)}</ul></div><div><span className="brief-label">CONSTRAINTS</span><ul className="constraint-list">{project.request.constraints.map((constraint) => <li key={constraint}>{constraint}</li>)}</ul></div></div>
-          <div className="spec-footer"><span>Example specification · static fixture</span><span>No approval record exists</span></div>
+          <div className="spec-review-columns"><div><span className="brief-label">AUTHENTICATION</span><p>{project.request.authentication}</p></div><div><span className="brief-label">DATA REQUIREMENT</span><p>{project.request.database}</p></div></div>
+          <div className="spec-summary"><span className="brief-label">ADDITIONAL CONTEXT</span><p>{project.request.additionalRequirements}</p></div>
+          <div className="spec-summary"><span className="brief-label">OPEN QUESTIONS</span><ul className="constraint-list">{project.request.reviewQuestions.map((question) => <li key={question}>{question}</li>)}</ul></div>
+          <div className="spec-footer"><span>Example specification · static fixture</span><span>Approval v{project.request.specificationVersion} · no record exists</span></div>
         </section>
 
         <aside className="approval-action-panel">
@@ -34,7 +39,7 @@ export default async function ApprovalPreviewPage({ params }: { params: Promise<
           <p>This screen shows the intended checkpoint. Approval is not enabled because there is no authenticated user or server to record it.</p>
           <button className="button button-dark button-full" type="button" disabled aria-describedby="approval-disabled-note">Approve specification</button>
           <button className="button button-outline button-full" type="button" disabled>Request changes</button>
-          <span className="disabled-hint" id="approval-disabled-note">Actions disabled in the local preview.</span>
+          <span className="disabled-hint" id="approval-disabled-note">Actions disabled: no signed-in user or server-side approval endpoint is connected.</span>
           <div className="version-lock"><span className="lock-mark" aria-hidden="true">⌑</span><p><strong>Approval scope</strong><br />In M1, a real approval must point to one immutable specification version.</p></div>
         </aside>
       </div>

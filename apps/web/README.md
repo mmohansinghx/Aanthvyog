@@ -27,6 +27,10 @@ The helper temporarily prepends the already verified Node.js `24.22.3` directory
 - `/projects/studio-operations/activity` — static example timeline.
 - `/access` — explains that authentication is not connected.
 
+## Current interface scope
+
+The refreshed landing page presents the proposed workflow and planned agent roles. The dashboard and workspace use static, visibly labelled fixtures. The request builder covers product type, intended outcome and users, required features, authentication/data needs, technology preference, constraints, and extra context. It validates and summarizes the brief in page state only. Approval actions are disabled; the activity page contains illustrative events rather than an audit log.
+
 The form does not submit to a server and its preview is held only in component state. The dashboard, workspace, approval, and activity content comes from `src/lib/demo-data.ts`; it is not database-backed. There is no authentication, API, persistence, Catalyst configuration, AI provider, agent execution, or generated-code execution. Do not enter sensitive or private data.
 
 ## Local checks
@@ -38,4 +42,4 @@ npm test
 npm run build
 ```
 
-Vitest covers the browser-only request validation and preview labels. It does not test authentication, ownership, persistence, approvals, cancellation, audit storage, Catalyst integration, or the M1 backend acceptance criteria.
+Vitest covers the browser-only request validation and preview labels. A local headless Chromium layout check loaded all seven routes at 320, 390, 768, and 1440 CSS pixel widths; no document exceeded the requested viewport width. It does not test authentication, ownership, persistence, approvals, cancellation, audit storage, Catalyst integration, or the M1 backend acceptance criteria.
