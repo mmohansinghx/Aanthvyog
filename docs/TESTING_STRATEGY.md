@@ -1,32 +1,52 @@
 # Testing strategy
 
 **Status:** In Design
-**Test evidence:** no application exists in the inspected workspace; no tests were run for this documentation-only foundation.
+**Test evidence:** no application or test setup exists; no application tests were run for this documentation update.
 
 ## Independent QA model
-QA & Delivery uses criteria prepared independently of Engineer claims. An agent or engineer cannot mark its own unverified output Tested. QA records environment, version, exact command or procedure, outcome, defects, and reviewer. Founder retains release authority.
 
-## Proposed test layers
-- **Unit:** domain rules, state transitions, validation, cost and usage limits.
-- **Contract:** request/response schemas and versioned agent handoffs.
-- **Integration:** identity, persistence, storage, API behavior, and ownership enforcement using isolated test data.
-- **Security:** cross-owner access, auth bypass, injection, CSRF, SSRF where applicable, file traversal, secret leakage, rate limits, and generated-workspace boundaries.
-- **End-to-end:** approved flows from request intake through approval, cancellation, QA findings, and handover.
-- **Accessibility and responsive:** keyboard operation, semantics, contrast, layout, supported viewport/browser matrix.
-- **Resilience:** timeout, retry, idempotency, cancellation, provider failure, partial writes, and recovery behavior.
-- **Migration and recovery:** schema compatibility, backup restore, export, and deletion behavior.
+QA uses criteria prepared independently of implementation claims. An engineer/agent cannot mark its own unverified output Tested. Record environment, source revision, exact command/procedure, outcome, defects, and reviewer. Founder retains release authority.
 
-## Required post-implementation checks
-For each approved implementation milestone, run and record the applicable lint command, TypeScript check, automated tests, production build, and security review. Include exact commands, environment, source revision, results, and failures. Do not mark a check passed when it was skipped or not run. QA independently reviews the evidence and acceptance criteria.
+## M1 test layers
+
+- **Unit:** input validation, state transition matrix, ownership predicates, specification hashing, safe error mapping, idempotency, usage-limit and pause rules.
+- **Contract:** request/response schemas, stable error codes, field-size limits, version/concurrency behavior, lifecycle/API compatibility.
+- **Integration:** real authentication session verification, Catalyst Functions to Data Store reads/writes, audit persistence, invitation/recovery integration, and safe structured API errors. Use isolated test data and verify the configured region/account.
+- **Security:** no unauthenticated access; no public signup; cross-owner reads/writes blocked; owner spoofing fails; IDOR checks for project/request/task/approval; stale approvals rejected; admin privilege constrained; injection and CSRF protections; logs contain no secrets.
+- **End-to-end:** admin invite -> user password setup -> login -> create project/request -> update structured requirements -> view status -> approve exact specification version/reject/cancel -> inspect persisted activity and audit history.
+- **Cancellation/resilience:** cancellation blocks future lifecycle action; repeated requests are idempotent; stale updates fail; partial write recovery does not create a state without its audit event; actual failures are distinguished from demo fixtures.
+- **Billing/limits:** ceilings pause before unapproved usage; task creation/continuation remains paused when account usage or billing status cannot be checked; no test crosses an account free-tier threshold.
+- **Accessibility/responsive:** keyboard, semantics, contrast, responsive layout, and supported browser/viewport matrix.
+- **Privacy lifecycle:** export contains only the user's data; deletion follows the approved retention policy; provider backup claims match written provider evidence.
+
+## Acceptance evidence matrix
+
+| Acceptance criterion | Minimum evidence |
+|---|---|
+| Invited user can create a request | End-to-end test with a real invite-only configured test account; public signup disabled. |
+| Request has a defined owner | Persisted record inspection showing server-assigned owner; client spoofing test. |
+| Only an authorized owner can view/update | Cross-owner integration tests for each protected entity and endpoint. |
+| Lifecycle transitions are validated | Unit/contract tests for every allowed and rejected state edge, including stale versions. |
+| Approval records specification version | Integration test that approval stores actor/version/hash and rejects mismatches/stale versions. |
+| Cancellation is safe | End-to-end test showing cancellation state/audit record and no subsequent work dispatch. |
+| Audit is recorded | Persistence test for required actor, timestamp, target, action, correlation; redaction test. |
+| Errors are structured and safe | Contract test for validation/auth/not-found/conflict/internal errors with no stack/secret leakage. |
+| INR 0 ceiling is respected | Usage guard tests plus manual account-level quota/billing review before any live use. |
+| Demo data is distinct | UI/API test that identifies fixtures and confirms they are not returned as persisted data. |
+
+## Required checks before release
+
+For an approved implementation phase, record applicable lint, type-check, automated tests, production build, dependency review, security review, data export/deletion test, and independent QA. Include exact commands, environment, commit, outputs, and failures. Do not mark skipped checks passed. For Next.js asynchronous Server Components, prefer end-to-end coverage where unit-test tooling does not support the component behavior.
 
 ## Release evidence
-For each acceptance criterion, record a traceable test or review result. A release candidate should include:
-- Exact source revision and environment.
-- Lint, type-check, automated-test, and production-build outcomes.
-- Security findings and disposition.
-- Dependency and configuration review.
-- Data migration and rollback evidence where applicable.
+
+- Exact source revision and environment, plus verified provider region/service configuration.
+- Lint, type-check, automated-test, and build outcomes.
+- Security findings and disposition; test-account invite/recovery and ownership evidence.
+- Migration, cancellation, export/deletion, and rollback evidence where applicable.
+- Account quota/billing review demonstrating the INR 0 guard condition.
 - QA recommendation and founder release decision.
 
 ## Open decisions
-Define browser support, accessibility target, performance thresholds, availability and recovery objectives, test data policy, staging strategy, security test ownership, and release evidence retention. Values are intentionally not invented here.
+
+Choose accessibility target, supported browsers, performance thresholds, availability/recovery goals, sanitized test-data policy, staging strategy, independent QA owner, and evidence retention. Exact thresholds are intentionally not invented here.

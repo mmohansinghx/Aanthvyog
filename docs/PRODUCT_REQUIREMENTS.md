@@ -30,6 +30,21 @@ Proposed job: describe the outcome, review a structured specification, approve a
 7. **Handover - Planned:** provide source, test evidence, known limits, setup instructions, architecture, data/API docs, and security notes.
 8. **Project control - Planned:** show task state, safe progress, usage limits, cancellation, and approval requests.
 
+## M1 secure project and request lifecycle requirements
+
+These are planned requirements, not implemented features. The founder approved the data-region intent, invite-only authentication, and real persistence requirements on 2026-11-12; see [Decision Register](DECISION_REGISTER.md).
+
+1. **Landing and access - Planned:** provide an AANTVYOG landing page and invite-only sign-in. Public registration is disabled; no fake authentication.
+2. **Dashboard - Planned:** list authenticated user's projects from persisted data. UI preview fixtures must be clearly labelled and must not appear as saved records.
+3. **Project creation and details - Planned:** allow a user to create and view a project with structured requirements.
+4. **Lifecycle - Planned:** display and update only validated request states; server assigns and enforces the individual `owner_user_id` for every protected read and write.
+5. **Approval - Planned:** show the exact specification version and record an authorized decision, actor, timestamp, and content hash.
+6. **Activity - Planned:** show persisted lifecycle/audit activity. Do not imply AI execution, code generation, or success when no such work occurred.
+7. **Cancellation and errors - Planned:** handle cancellation safely and return structured, redacted API errors with correlation IDs.
+8. **Persistence and cost - Planned:** persist identity references, projects, requests/tasks, approvals, and audit events. Pause before unapproved billable usage under the strict INR 0 target.
+
+M1 makes no AI model calls, configures no AI provider, executes no generated code, allows no unrestricted public registration, and has no production deployment.
+
 ## Proposed non-functional requirements
 - Enforce identity, authorization, and project ownership on the server.
 - Validate requests and responses at trust boundaries.
@@ -42,5 +57,5 @@ Proposed job: describe the outcome, review a structured specification, approve a
 ## Exclusions for the initial planning baseline
 Universal framework/database/hosting claims; uncontrolled autonomous execution or agent self-approval; live model calls before provider approval; production deployment or paid service activation; security or production-ready guarantees without evidence.
 
-## Decisions needed before scope approval
-Choose first validated customer segment and project type, identity/account model, approved stack, storage and retention, generated-code sandbox, initial usage limits, and release evidence. Proposed M1 acceptance criteria are in PROJECT_MASTER.md.
+## Decisions and verification still needed
+The intended India data region, invite-only authentication, and real core-record persistence are Founder Approved; their account-level capability and setup still require verification. The Next.js/TypeScript/Tailwind and Catalyst service choices are proposed defaults. Remaining product decisions include the first validated customer segment and project category, retention/export/deletion details, future generated-code sandbox, exact usage ceilings, and release evidence. Proposed M1 acceptance criteria are in PROJECT_MASTER.md; none are implemented or tested yet.

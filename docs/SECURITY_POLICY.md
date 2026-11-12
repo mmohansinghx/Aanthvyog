@@ -1,50 +1,72 @@
 # Security policy
 
 **Status:** In Design
-**Policy state:** baseline requirements for future implementation; controls are not deployed.
+**Policy state:** requirements for future implementation; controls are not deployed or tested.
 
-## Security objectives
-Protect identity, project data, source artifacts, provider credentials, and generated execution environments. Apply least privilege, secure defaults, defense in depth, and evidence-based release review.
+## Security decision state
 
-## Required controls
-### Identity and authorization
-- Authenticate through an approved identity mechanism.
-- Authorize every protected server action; never rely on client-hidden controls.
-- Verify user, workspace, project, run, and artifact ownership on every read and write.
-- Define roles and privileged operations before collaboration or administration.
+- **Founder Approved (2026-11-12):** real authentication with invite-only access; real persistent core records; India as intended region.
+- **Proposed controls:** Catalyst Authentication, server-side owner checks, least-privilege Catalyst Functions/Data Store access, audited lifecycle, and explicit usage ceilings.
+- India account selection, Catalyst service settings, and application controls are not implemented or verified.
 
-### Input, output, and application security
-- Validate input types, size, and allowed values; encode output for its context.
-- Use safe query and file APIs; defend against injection, XSS, CSRF, SSRF, path traversal, and unsafe redirects as applicable.
-- Use secure cookie/session settings and rate limiting where supported.
-- Return generic errors to users; keep sensitive diagnostics in access-controlled logs.
+## Identity and access
 
-### Secrets and dependencies
-- Keep secrets server-side in an approved secret store or protected environment.
-- Never commit credentials or expose them in browser bundles, generated workspaces, examples, logs, or support artifacts.
+- No unrestricted public signup in M1. Invitation is controlled by an administrator through a verified provider-supported process.
+- Do not implement mock/fake authentication. Provider-managed password setup and recovery flows must be tested; define how invites expire, are revoked, and handle expired/invalid links before release. No expiry guarantee is assumed.
+- Every protected API authenticates the session/token server-side. Frontend middleware, hidden navigation, and disabled buttons are not authorization controls.
+- The authenticated identity is derived from verified server context. `owner_user_id` is server-assigned and enforced for every project, request, task, approval, and artifact operation.
+- The M1 model is individual ownership: one owner per project. Workspace, membership, and collaborator roles are deferred.
+- Catalyst table scopes/roles are defense in depth. App-level filtering by owner is mandatory, and Function credentials must be reviewed to ensure they do not bypass the intended user boundary.
+- Do not give administrators blanket access to project content by default. Any support/break-glass access requires a separately approved, least-privilege, time-bound, audited procedure.
+
+## Input, output, and application security
+
+- Validate all inputs on the server, including field allowlists, string size, nested collection bounds, identifiers, state transitions, version/hash checks, and idempotency.
+- Use safe query and file APIs; defend against injection, XSS, CSRF, SSRF, path traversal, and unsafe redirects where applicable.
+- Use secure cookie/session settings, CSRF protections, and rate limits appropriate to the verified hosting/auth model.
+- Return safe structured errors with correlation IDs. Redact credentials, tokens, request secrets, personal data, and internal stack traces from logs and user responses.
+- Keep UI demo fixtures visibly labelled and inaccessible as if they were real user records.
+
+## Secrets and dependencies
+
+- Keep secrets server-side in a supported protected environment. Never commit credentials or expose them in browser bundles, logs, examples, or user project content.
+- Do not store raw auth tokens or passwords in platform data.
 - Review dependency purpose, maintenance, license, vulnerabilities, permissions, cost, alternatives, and migration path before adoption.
 - Rotate credentials and restrict scopes; do not copy production secrets into local development.
 
-### Generated code and files
+## Data protection and lifecycle
+
+- Collect only identity references and project data required to deliver M1. Do not request unnecessary sensitive personal information.
+- Confirm the actual Zoho account's India data center and component availability. Request written component-level data residency information for processing, storage, logs, and backups if required.
+- Define data classification, retention duration, user export, account deletion, audit-event retention, and support access before release.
+- Do not claim that deleting an application record immediately removes all provider backup copies; verify and document the provider's actual deletion and retention behavior.
+- Approval records bind the actor and decision to an immutable specification version/hash. Audit events capture relevant lifecycle/security actions without secrets.
+- No model provider, AI call, prompt transfer, generated-code execution, or external model data sharing is in M1.
+
+## Billing and abuse controls
+
+- Target operating cost is INR 0. No paid subscriptions, payment method entry, paid API, overage, or production deployment is authorized.
+- Catalyst free-tier allowances are shared across projects/account resources; overage can become chargeable and may trigger minimum billing. Do not describe this as unlimited free infrastructure.
+- Before any Catalyst initialization or use, verify account billing mode and current usage. M1 must apply internal per-user/per-project request ceilings and an automatic pause before unapproved usage. If quota/billing state is unavailable or uncertain, pause usage.
+- Usage controls are not a substitute for account billing controls; monitor account-level usage and stop before the free boundary.
+
+## Generated code and files (future scope)
+
 - Treat prompts, generated source, archives, and dependencies as untrusted.
-- Use isolated workspaces with restricted filesystem, process, network, CPU, memory, duration, and artifact permissions.
-- Never allow arbitrary host paths or unrestricted shell execution.
-- Validate archive contents, path names, file types, size, and content before storage or download.
-- Do not expose environment variables or platform credentials to generated processes.
+- M1 makes no model call and executes no generated code. Any future implementation requires an isolated workspace with restricted filesystem, process, network, CPU, memory, duration, and artifact permissions.
+- Never allow arbitrary host paths or unrestricted shell execution. Validate archive paths, file types, size, and content before storage/download. Do not expose environment variables or platform credentials to generated processes.
 
-### Privacy and data lifecycle
-- Define data classification, purpose, retention, export, deletion, backup deletion, and provider sharing before production.
-- Minimize model context; approve provider and data terms before real model calls.
-- Restrict support and operator access and audit sensitive access.
-- Avoid unnecessary personal or sensitive data collection.
+## Reliability, audit, and response
 
-### Reliability and response
-- Add structured logs with correlation IDs and redaction.
+- Persist lifecycle transitions with a matching append-oriented audit event, actor, timestamp, and correlation ID. Audit metadata must use an allowlist and redact secrets.
+- Make retries idempotent, bound work, and ensure cancellation prevents future work from starting.
 - Define backup, restore, incident escalation, vulnerability intake, and security patch timelines before release.
-- Record exceptions, risk owner, expiry, and compensating controls; founder approves material risk acceptance.
+- Record exceptions with risk owner, expiry, and compensating controls; founder approval is required for material risk acceptance.
 
 ## Review gates
-Security reviews identity and ownership, file handling, generated execution, external integrations, secrets, data policy, and production readiness. QA independently verifies applicable controls. Founder approval is mandatory for external integrations, paid services, production deployment, major architecture, and material user-data changes.
+
+Security review must cover identity and ownership, invite/recovery behavior, input validation, data lifecycle, billing pauses, secrets, audit trail, and any external integration. QA independently verifies controls. Founder approval is required before paid services, payment method entry, production deployment, Catalyst project initialization, external account changes, generated-code execution, or material user-data change as set by the current approval record.
 
 ## Incident handling
+
 A future runbook must define detection, triage, containment, evidence preservation, notification obligations with qualified counsel, recovery, and post-incident review. This document does not claim a staffed security operation or provide legal advice.

@@ -3,6 +3,8 @@
 **Status:** In Design
 **Operational status:** none of the agents or orchestration infrastructure is implemented or connected to a model provider.
 
+**M1 boundary:** The planned agent-activity interface reports persisted request/task lifecycle facts only. M1 does not run Architect, Engineer, or QA agents, call a model, execute generated code, or claim simulated activity as successful execution. Any preview fixture must be visibly labelled demo data.
+
 ## Roles
 ### Agent 1 - Architect
 Clarifies requirements; produces functional requirements, technology proposal, architecture, database schema, API contract, access controls, implementation plan, and technical risks. It may ask questions and return a specification; it cannot approve its implementation or choose an unapproved paid provider.

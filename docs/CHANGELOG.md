@@ -2,10 +2,10 @@
 
 All notable changes to the AANTVYOG foundation package are recorded here.
 
-## 2026-11-12 - Repository review and local documentation seed
-- Inspected the supplied GitHub repository; it was empty and had no branch refs.
-- Cloned the repository locally to work/Aanthvyog and copied in the documentation package as uncommitted files.
-- Made no commit or remote write.
+## 2026-11-12 - Repository review and documentation baseline
+- Verified that documentation commit `18c5f24` is present on local `main` and GitHub `origin/main`.
+- Corrected the repository history: the docs are present remotely and locally; the repository remains documentation-only.
+- The initial repository state at that commit had no application source, package manifest, tests, or Catalyst configuration.
 
 ## 2026-11-12 - Organization and engineering foundation
 - Inspected the initial task workspace; found no application code, package manifest, or project documentation.
@@ -16,3 +16,11 @@ All notable changes to the AANTVYOG foundation package are recorded here.
 - Recorded the first development milestone as a proposal requiring founder review.
 - No external services were configured; no paid APIs were connected; no AI agents were represented as operational.
 - No application tests or builds were run because the inspected workspace had no application.
+
+## 2026-11-12 - M1 founder decisions and readiness documentation
+- Recorded founder approval for India as the intended data region, real invite-only authentication, and real persistence for core records.
+- Documented proposed Next.js/TypeScript/Tailwind, Catalyst Slate evaluation, Catalyst Functions, Catalyst Data Store, and Catalyst Authentication defaults; AppSail remains excluded absent a documented need.
+- Added individual project ownership, server-side owner validation, a request/approval/audit data model, lifecycle and authorization requirements, and migration guidance.
+- Recorded current account, invite expiry, region, schema/query, billing, retention, export, deletion, Node, and CLI verification gaps.
+- Recorded the INR 0 target and the shared free-tier and minimum-billing risk; no paid services or payment method are authorized.
+- No Catalyst project was initialized, no global tool was installed, no app code was added, and no tests were run.

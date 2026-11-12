@@ -1,7 +1,7 @@
 # AANTVYOG agent and contributor instructions
 
 ## Current status
-This folder is a documentation foundation package, not an application repository. The inspected workspace contained no source code, Git metadata, dependency manifest, or pre-existing project documentation. Product architecture and capabilities are proposals until approved and implemented.
+This repository is a documentation foundation, not an application implementation. It contains Git metadata and project documentation but no application source, dependency manifest, lockfile, app tests, or Catalyst configuration. On 2026-11-12 the founder approved the intended India region, invite-only authentication, and real persistence for core records; those decisions are not proof of account verification, implementation, or tests. Other architecture defaults remain proposals unless the decision register says otherwise.
 
 ## Authority and scope
 - The founder retains final authority over product vision, budget, paid services, major architecture, external integrations, production deployment, and company decisions.
@@ -19,11 +19,11 @@ This folder is a documentation foundation package, not an application repository
 6. Do not execute generated code with unrestricted host access. Future generated work must use an isolated, restricted workspace.
 7. Before adopting a dependency or service, record purpose, cost, permissions, security implications, free alternatives, and migration path.
 8. Do not present mock or placeholder behavior as a working feature.
-9. Use only these feature statuses: Planned, In Design, In Development, Implemented, Tested, Released. A status needs evidence; Released requires release evidence.
+9. Keep decision statuses separate from feature statuses. Decisions use Proposed, Founder Approved, Technically Verified, Implemented, and Tested; features use Planned, In Design, In Development, Implemented, Tested, and Released. A status needs evidence; Released requires release evidence.
 10. Never say tests, checks, or builds passed unless they were actually run. QA must independently review Engineer output.
 
 ## Approval gates
-Obtain founder approval before paid API use, paid hosting, subscription activation, payment method entry, production deployment, destructive database migration, major architecture change, external account creation, sensitive external integration, or material user-data change. The first product implementation milestone is proposed in docs/PROJECT_MASTER.md and is not approved yet.
+Obtain founder approval before paid API use, paid hosting, subscription activation, payment method entry, production deployment, destructive database migration, major architecture change, external account creation, sensitive external integration, or material user-data change. The founder-approved region, invite-only authentication, and persistence decisions do not authorize Catalyst initialization, global tool installs, paid or overage usage, or production deployment. M1 implementation scope remains proposed in docs/PROJECT_MASTER.md.
 
 ## Reporting
 For each milestone, summarize changed files, decisions and assumptions, checks actually run, failures, remaining risks, and approval gates. If a requested change conflicts with these rules, identify the specific gate and leave a reviewable proposal where possible.
