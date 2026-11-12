@@ -39,8 +39,9 @@ These are separate evidence states, not automatic steps. A decision may be Found
 
 - The original documentation commit `18c5f24` is present on the local `main` branch and remote `origin/main`.
 - The repository contains documentation only. No package manifest, lockfile, test setup, `catalyst.json`, or `.catalystrc` was present at review.
-- Local environment observed: Node.js `24.13.1`, npm `11.8.0`; Catalyst CLI is not installed. Catalyst's current security guidance recommends Node.js `24.22.1+` or `22.23.4+`.
-- Catalyst CLI release notes list version `1.27.2` in September 2026; recheck current stable version before installation.
+- Local environment observed: Windows 11 Home Single Language (build 26300, 64-bit); Node.js `24.13.1`, npm `11.8.0`, Git `2.54.0.windows.1`; Catalyst CLI is not installed. Repository is clean at the founder-specified commit `6bc3f560e28c6f1850adae3b3daad40f59aceb4c`; 25.15 GiB was available on the repository volume.
+- Catalyst's security floor is Node.js `24.22.1+` or `22.23.4+`. The latest Node 24 LTS patch published as of 2026-11-12 is `24.22.3` (security release on Nov 11); local Node remains unchanged. Catalyst Slate currently supports Node 22 for framework apps; latest Node 22 patch is `22.23.5`, so local Node 24 and hosted Slate Node 22 require a compatibility check.
+- Catalyst CLI release notes list version `1.27.2` as the latest stable release as of this review. The current npm global prefix is user-scoped; no install was attempted.
 - No global tool install, Node update, Catalyst login/initialization, remote project creation, payment setup, production deployment, or test run occurred in this update.
 
 ## Required evidence before Catalyst initialization

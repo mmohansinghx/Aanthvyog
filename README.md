@@ -15,6 +15,7 @@ Decision statuses use: Proposed, Founder Approved, Technically Verified, Impleme
 - [Company operating model](docs/COMPANY_OPERATING_MODEL.md) - 15 functional departments, deliverables, inputs, boundaries, dependencies, and reviews.
 - [Project master](docs/PROJECT_MASTER.md) - inspected state, open decisions, and proposed first development milestone.
 - [Decision register](docs/DECISION_REGISTER.md) - approval and verification state for M1 architecture decisions.
+- [M1 technical preflight](docs/M1_TECHNICAL_PREFLIGHT.md) - environment audit, implementation blueprint, service checks, cost controls, and coding sequence.
 - [Product requirements](docs/PRODUCT_REQUIREMENTS.md) - initial product brief and proposed requirements.
 - [System architecture](docs/SYSTEM_ARCHITECTURE.md) - proposed component and trust boundaries.
 - [Database schema](docs/DATABASE_SCHEMA.md) - conceptual data model; not deployed.

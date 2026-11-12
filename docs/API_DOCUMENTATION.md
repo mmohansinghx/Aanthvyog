@@ -12,6 +12,7 @@
 - Persist state changes and corresponding audit records; use idempotency and optimistic concurrency to protect retries and stale updates.
 - Return stable safe errors and a correlation ID. Do not reveal existence of another user's object, stack traces, provider internals, secrets, or raw tokens.
 - Endpoint names and schemas remain proposals pending technical verification of Catalyst authentication and Functions runtime.
+- The initial contract version is HTTP `/api/v1` with `schemaVersion: 1` on validated request/response objects. Incompatible contract changes require a new version; adding a field is allowed only where the schema explicitly permits it.
 
 ## Invite-only access
 
@@ -31,6 +32,8 @@ Proposed identity path: Catalyst Authentication with public signup disabled. An 
 | `POST /api/v1/projects/{projectId}/requests/{requestId}/approval` | Record approve/reject on exact spec version/hash. | Owner authenticated; spec/hash current; decision audited. |
 | `POST /api/v1/projects/{projectId}/requests/{requestId}/cancel` | Safely cancel uncompleted request. | Owner verified; transition allowed; audit event appended. |
 | `GET /api/v1/projects/{projectId}/requests/{requestId}/activity` | Read persisted lifecycle/audit activity. | Owner verified; response omits restricted details. |
+| `GET /api/v1/me/export` | Export the authenticated user's owned projects, requests, specification versions, approvals, and user-visible audit history. | Authenticated; export query is scoped to the verified caller; response format/version documented. |
+| `POST /api/v1/me/deletion-requests` | Begin an account/project data deletion workflow after explicit confirmation. | Authenticated and recently re-authenticated where supported; scope, retention exceptions, and audit treatment follow the approved deletion policy. |
 
 M1 has no endpoint to invoke an AI agent, execute generated code, deploy a project, or return fabricated task success. Admin invitation/recovery operations remain in the provider's controlled admin path until a separately reviewed API is justified.
 
@@ -53,6 +56,7 @@ Every state transition must be checked against `(current_state, requested_state,
 
 ~~~json
 {
+  "schemaVersion": 1,
   "category": "business_website",
   "goal": "Describe the intended outcome",
   "requirements": {

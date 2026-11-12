@@ -54,6 +54,8 @@ Acceptance criteria (not yet implemented or tested):
 
 Three architecture decisions are Founder Approved; their account-level and technical conditions remain open. The implementation baseline remains proposed. M1 is not implemented or tested, and Catalyst initialization requires separate explicit permission.
 
+The current environment and coding blueprint are recorded in [M1 Technical Preflight](M1_TECHNICAL_PREFLIGHT.md). The preflight does not authorize software installation, Node updates, Catalyst initialization, database creation, or deployment.
+
 ## Remaining decisions and verification
 1. Confirm the account's India data center in the actual Zoho console and verify service availability. Obtain a written component-level data residency statement from Catalyst support if required.
 2. Verify the exact invite-only authentication configuration, invitation expiry/invalid-link handling, recovery flow, and current development user limits in the account. No expiry guarantee is assumed.

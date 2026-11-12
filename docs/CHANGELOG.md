@@ -24,3 +24,10 @@ All notable changes to the AANTVYOG foundation package are recorded here.
 - Recorded current account, invite expiry, region, schema/query, billing, retention, export, deletion, Node, and CLI verification gaps.
 - Recorded the INR 0 target and the shared free-tier and minimum-billing risk; no paid services or payment method are authorized.
 - No Catalyst project was initialized, no global tool was installed, no app code was added, and no tests were run.
+
+## 2026-11-12 - M1 technical preflight
+- Audited the Windows/Node/npm/Git environment, free space, CLI availability, and global developer tools without reporting personal identifiers.
+- Verified the requested repository commit against local `main` and remote `origin/main`.
+- Recorded current Node 24 LTS patch `24.22.3`, Catalyst security minimum, CLI `1.27.2`, Slate Node 22 compatibility, and the side-by-side upgrade proposal.
+- Added a versioned frontend/backend, data/API, test, cost-control, and coding-sequence blueprint for founder review.
+- No Node or global tool was installed/changed; no Catalyst project, database table, deployment, or test was created/run.

@@ -1,7 +1,7 @@
 # Database schema
 
 **Status:** In Design
-**Schema state:** logical design only; no Catalyst project, tables, migrations, or persisted application records exist.
+**Schema state:** logical contract version 1 proposal only; no Catalyst project, tables, migrations, or persisted application records exist.
 
 ## Decision and evidence state
 
@@ -40,12 +40,12 @@ Each project and project-scoped child row stores `owner_user_id`, validated agai
 | Entity | Purpose | Candidate fields | Ownership and constraints |
 |---|---|---|---|
 | `PlatformUser` | Minimal internal identity mapping. | `id`, `auth_provider`, `provider_subject`, `created_at`, `status` | Unique `(auth_provider, provider_subject)`; no password/session secrets in this table. |
-| `Project` | User's project container and current summary. | `id`, `owner_user_id`, `name`, `category`, `status`, `created_at`, `updated_at`, `row_version` | Exactly one owner; server sets owner; allowed category/status values; owner index. |
-| `ProjectRequest` | Structured request and current lifecycle. | `id`, `project_id`, `owner_user_id`, `request_data`, `state`, `created_at`, `updated_at`, `submitted_at`, `cancelled_at`, `idempotency_key`, `row_version` | Owner must match project; bounded validated JSON; idempotency unique within owner scope. |
-| `SpecificationVersion` | Immutable requirements/spec version reviewed by a user. | `id`, `project_id`, `request_id`, `owner_user_id`, `version`, `content`, `content_sha256`, `created_at`, `created_by` | Unique `(request_id, version)`; content immutable after approval; canonical hash ties approval to exact bytes/representation. |
-| `TaskLifecycle` | Persisted status shown in the agent activity UI. | `id`, `request_id`, `project_id`, `owner_user_id`, `kind`, `state`, `created_at`, `updated_at`, `cancel_requested_at`, `finished_at`, `safe_error_code` | M1 tracks lifecycle only; no agent execution or generated output is implied. |
-| `Approval` | Human decision on an exact spec version. | `id`, `request_id`, `project_id`, `owner_user_id`, `specification_version_id`, `specification_hash`, `decision`, `actor_user_id`, `decided_at`, `comment` | Decision allowlist; actor authorized; spec version/hash required; append a new record for later decisions. |
-| `AuditEvent` | Append-oriented security and lifecycle history. | `id`, `owner_user_id`, `project_id`, `request_id`, `actor_type`, `actor_id`, `action`, `target_type`, `target_id`, `occurred_at`, `correlation_id`, `safe_metadata` | No secrets/raw tokens; strict metadata allowlist; append-only through application APIs. |
+| `Project` | User's project container and current summary. | `schema_version`, `id`, `owner_user_id`, `name`, `category`, `status`, `created_at`, `updated_at`, `row_version` | Contract version 1; exactly one owner; server sets owner; allowed category/status values; owner index. |
+| `ProjectRequest` | Structured request and current lifecycle. | `schema_version`, `id`, `project_id`, `owner_user_id`, `request_version`, `request_data`, `state`, `created_at`, `updated_at`, `submitted_at`, `cancelled_at`, `idempotency_key`, `row_version` | Owner must match project; bounded validated JSON; idempotency unique within owner scope. |
+| `SpecificationVersion` | Immutable requirements/spec version reviewed by a user. | `schema_version`, `id`, `project_id`, `request_id`, `owner_user_id`, `version`, `content`, `content_sha256`, `created_at`, `created_by` | Unique `(request_id, version)`; content immutable after approval; canonical hash ties approval to exact bytes/representation. |
+| `TaskLifecycle` | Persisted status shown in the activity UI. | `schema_version`, `id`, `request_id`, `project_id`, `owner_user_id`, `kind`, `state`, `created_at`, `updated_at`, `cancel_requested_at`, `finished_at`, `safe_error_code`, `row_version` | Contract version 1; M1 tracks request lifecycle only; no agent execution or generated output is implied. |
+| `Approval` | Human decision on an exact spec version. | `schema_version`, `id`, `request_id`, `project_id`, `owner_user_id`, `specification_version_id`, `specification_hash`, `decision`, `actor_user_id`, `decided_at`, `comment` | Decision allowlist; actor authorized; spec version/hash required; append a new record for later decisions. |
+| `AuditEvent` | Append-oriented security and lifecycle history. | `schema_version`, `id`, `owner_user_id`, `project_id`, `request_id`, `actor_type`, `actor_id`, `action`, `target_type`, `target_id`, `occurred_at`, `correlation_id`, `previous_event_hash`, `event_hash`, `safe_metadata` | No secrets/raw tokens; strict metadata allowlist; append-only through app APIs. Hash chaining can detect alteration but Data Store is not claimed to be immutable or tamper-proof against privileged admins. |
 
 Workspace, Membership, Artifact, and AI/provider UsageLedger are out of M1 scope. Add them only through a separately reviewed schema change. Demo data is frontend-only or isolated fixture data and is never represented as a database row.
 
@@ -71,6 +71,7 @@ The proposed states are `draft`, `submitted`, `needs_information`, `specificatio
 - Use optimistic `row_version` or equivalent to reject concurrent stale state updates.
 - Normalize timestamps to UTC; treat timestamps/owners/state as server-controlled fields.
 - Establish exact numeric limits before implementation and enforce them server-side; don't invent unbounded content fields.
+- Each external request/response and persisted contract carries `schemaVersion: 1`; future incompatible shapes require a new version and migration review. Candidate numeric caps and example contracts are recorded in [M1 Technical Preflight](M1_TECHNICAL_PREFLIGHT.md) and remain proposed until approved.
 
 ## Retention, export, and deletion proposal
 
