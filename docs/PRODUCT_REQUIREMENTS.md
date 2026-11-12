@@ -32,7 +32,7 @@ Proposed job: describe the outcome, review a structured specification, approve a
 
 ## M1 secure project and request lifecycle requirements
 
-These are planned requirements, not implemented features. The founder approved the data-region intent, invite-only authentication, and real persistence requirements on 2026-11-12; see [Decision Register](DECISION_REGISTER.md).
+These are product requirements; the secure and persisted behaviors remain planned. A local UI preview implements some screens, but it does not satisfy the full requirements for authentication, server-side ownership, lifecycle writes, approval records, audit storage, or persistence. The founder approved the data-region intent, invite-only authentication, and real persistence requirements on 2026-11-12; see [Decision Register](DECISION_REGISTER.md).
 
 1. **Landing and access - Planned:** provide an AANTVYOG landing page and invite-only sign-in. Public registration is disabled; no fake authentication.
 2. **Dashboard - Planned:** list authenticated user's projects from persisted data. UI preview fixtures must be clearly labelled and must not appear as saved records.

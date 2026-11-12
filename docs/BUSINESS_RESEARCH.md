@@ -14,7 +14,7 @@ Do not fabricate market size, competitor capabilities, customer quotes, conversi
 
 ## Current evidence
 - **Verified from founder brief:** AANTVYOG intends to build an AI Website & Web Application Builder and listed eight initial project categories.
-- **Verified from workspace inspection:** no application, service configuration, market research, or customer evidence was present in this workspace.
+- **Verified at initial workspace inspection:** no application, service configuration, market research, or customer evidence was present then. The later local UI preview is not market research or customer validation.
 - **Assumptions:** target users may include small businesses, portfolio owners, education organizations, internal dashboard teams, and SaaS founders. Their priority, unmet needs, and willingness to pay are unknown.
 - **Unknown:** competitor capabilities and pricing, demand by segment, alternatives used, acquisition channels, cost to serve, and differentiation.
 

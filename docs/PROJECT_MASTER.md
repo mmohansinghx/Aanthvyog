@@ -1,12 +1,12 @@
 # Project master
 
-**Status:** In Design
+**Status:** In Development — local frontend preview
 **Last inspected:** 2026-11-12
 
 ## Project state at inspection
-The repository review confirmed that commit `18c5f24` is present in the local clone and GitHub `origin/main`. The repository contains documentation, but no application source, package manifest, lockfile, tests, `catalyst.json`, or `.catalystrc`. The working tree was clean at the start of this update. Record any changes from this review with Git status and the changelog; do not infer implementation from documentation.
+At the start of the local implementation authorization, `main` and `origin/main` both pointed to `55586d6475b4120d8a43b73be16dd587ebd282be`; the checkout was clean. That revision had no application source, package manifest, lockfile, app tests, `catalyst.json`, or `.catalystrc`. The current local tree now has an `apps/web` Next.js frontend, exact dependency lockfile, and local unit/component tests. This records local state; consult Git status and the current remote separately to determine what is committed or pushed.
 
-No application has been built, no Catalyst service or project has been configured, and none of the three AI agents is operational. The founder approved the intended India region, invite-only authentication, and persistent core records on 2026-11-12. Actual account-region/service compatibility remains to be verified. No tests or builds were run because no application exists.
+The local frontend production build and local unit/component tests have been run. No Catalyst service or project has been configured, and none of the three AI agents is operational. The founder approved the intended India region, invite-only authentication, and persistent core records on 2026-11-12. Actual account-region/service compatibility remains to be verified. The frontend preview does not implement real authentication, server APIs, persistence, ownership enforcement, audit storage, approvals, cancellation, export, or deletion.
 
 ## Mission and product
 AANTVYOG's tagline is "Intelligence. United." The intended first product is an AI Website & Web Application Builder for business sites, portfolio sites, college and education sites, admin dashboards, SaaS web applications, CRUD applications, authentication-based applications, and database-driven applications. This is an initial target list, not a verified support matrix.
@@ -18,30 +18,35 @@ The planned three-agent workflow is Architect -> Engineer -> QA & Delivery, with
 - Define the three proposed agents and their coordination contract.
 - Establish product, architecture, security, engineering, research, marketing, and financial documentation.
 - Record unknown decisions without converting them into assumptions or claims.
-- Propose a first product development milestone for founder review.
+- Define the first product development milestone and track its implementation status.
+- Implement the founder-authorized local M1 frontend preview while keeping the backend and connected services clearly unimplemented.
 
 ## Status conventions
 - **Decision register:** Proposed, Founder Approved, Technically Verified, Implemented, Tested. These states describe different evidence: founder approval records intent; technical verification checks provider/account capability; implementation requires working code/configuration; testing requires recorded results. Do not infer later states from earlier ones.
 - **Product features:** Planned, In Design, In Development, Implemented, Tested, Released. Feature status describes delivered evidence; Released requires release evidence.
-- No tests or implementation are claimed in this update.
+- Local UI implementation and test evidence are listed below; these do not satisfy the secure, persisted M1 acceptance criteria.
 
-## Proposed first development milestone
-**M1 - Secure project and request lifecycle (scope proposal; no application implementation is authorized by the architecture decisions alone).**
+## First development milestone
+**M1 - Secure project and request lifecycle.** The founder authorized local-only frontend implementation on 2026-11-12. This does not authorize Catalyst initialization or remote/paid services.
 
 Goal: establish the smallest real platform foundation that accepts a user project request, persists it under the correct owner, exposes its lifecycle, and pauses at explicit approval before agent implementation. This milestone does not include live model calls or generated-code execution.
 
-Proposed deliverables:
-1. A responsive landing page and authenticated dashboard.
-2. Project creation and project details screens with structured project requirements and status tracking.
-3. A specification review/approval screen and agent-activity interface that never implies AI work occurred when it did not.
-4. Server-validated lifecycle APIs and real persistence for identity references, projects, requests/tasks, approvals, and audit events.
-5. Per-project `owner_user_id` enforcement on every protected operation.
-6. Safe cancellation and structured, redacted API errors.
-7. Independent QA evidence and updated setup, security, API, data, and operator documentation.
+Deliverables and current evidence:
+
+| M1 item | Current status | Evidence / limit |
+|---|---|---|
+| Responsive landing page | Implemented and tested locally | `apps/web/src/app/page.tsx`; Next.js build succeeds. |
+| Dashboard | Implemented and tested locally | `apps/web/src/app/dashboard/page.tsx`; static examples labelled. |
+| Project request creation UI and structured requirements | Implemented and tested as a browser-only preview | Client validation and a temporary summary; it does not submit or persist. |
+| Project workspace and status display | Implemented and tested locally | Static fixture, sample stage tracker, no live state transitions. |
+| Approval interface | Implemented and tested locally | Buttons are disabled; no approval record is made. |
+| Activity / agent activity interface | Implemented and tested locally | Static example events and an empty “not connected” agent state; no agents run. |
+| Authenticated dashboard, API, persistence, ownership checks, lifecycle enforcement, approvals and audit records | Not implemented or tested | Catalyst is not initialized; there is no server/data service. |
+| Export, deletion, billing guard, safe cancellation and independent backend QA | Not implemented or tested | Remain future M1 acceptance work. |
 
 M1 excludes live model calls, provider configuration, generated-code execution, unrestricted public registration, production deployment, and unapproved billable activity. Any UI fixtures must be explicitly labelled demo data and kept distinct from persisted records.
 
-Acceptance criteria (not yet implemented or tested):
+Real M1 acceptance criteria (not yet implemented or tested):
 - An invited authenticated user can create a project request; unrestricted public signup is disabled.
 - A request has a server-assigned owner, validated lifecycle state, timestamps, and audit events.
 - Every read/write checks the authenticated owner server-side; cross-owner access fails safely.
@@ -52,9 +57,9 @@ Acceptance criteria (not yet implemented or tested):
 - Usage ceilings pause work before an unapproved billable operation; target operating cost remains INR 0.
 - QA evidence traces each criterion to an independently reviewed check.
 
-Three architecture decisions are Founder Approved; their account-level and technical conditions remain open. The implementation baseline remains proposed. M1 is not implemented or tested, and Catalyst initialization requires separate explicit permission.
+The three core decisions (India region, invite-only real authentication, and real persistence) are Founder Approved; their account-level and technical conditions remain open. The local frontend baseline is authorized and implemented only as a fixture-based preview. M1 as a secure, persisted lifecycle is not complete. Catalyst initialization requires separate explicit permission.
 
-The current environment and coding blueprint are recorded in [M1 Technical Preflight](M1_TECHNICAL_PREFLIGHT.md). The preflight does not authorize software installation, Node updates, Catalyst initialization, database creation, or deployment.
+The initial environment and coding blueprint are recorded in [M1 Technical Preflight](M1_TECHNICAL_PREFLIGHT.md). The founder later authorized a checksum-verified side-by-side Node 24.22.3 runtime and local frontend dependencies; the system Node and machine-wide PATH were not changed. Catalyst initialization, database creation, and deployment remain unauthorized.
 
 ## Remaining decisions and verification
 1. Confirm the account's India data center in the actual Zoho console and verify service availability. Obtain a written component-level data residency statement from Catalyst support if required.

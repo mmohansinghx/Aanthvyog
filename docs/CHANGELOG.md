@@ -2,6 +2,15 @@
 
 All notable changes to the AANTVYOG foundation package are recorded here.
 
+## 2026-11-12 - Local M1 frontend foundation
+- Founder authorized a local-only Next.js App Router, TypeScript, and Tailwind implementation and a checksum-verified side-by-side Node.js 24.22.3 runtime; the system Node installation and machine-wide PATH were left unchanged.
+- Added the responsive landing page, dashboard, structured request preview, project workspace/status tracker, disabled approval actions, static activity timeline, explicit no-agent state, and access-status page.
+- Labelled demo fixtures and browser-only request preview throughout. No account identity, API, database write, Catalyst integration, AI provider, agent execution, or generated-code execution is present.
+- Added local Vitest/React Testing Library tests and PowerShell helper for using the verified Node binary in the current shell only.
+- Checks passed: `npm run lint`, `npm run typecheck`, `npm test` (3 files / 6 tests), `npm run build`. Mobile browser review at 390px showed no horizontal overflow on the activity route.
+- `npm audit` reports 7 moderate findings in development-only ESLint/TypeScript lint tooling; no high or critical advisories were reported. The audit is not clean and the findings remain documented for follow-up.
+- No Catalyst CLI/project, remote database, account, payment method, paid service, or production deployment was created.
+
 ## 2026-11-12 - Repository review and documentation baseline
 - Verified that documentation commit `18c5f24` is present on local `main` and GitHub `origin/main`.
 - Corrected the repository history: the docs are present remotely and locally; the repository remains documentation-only.

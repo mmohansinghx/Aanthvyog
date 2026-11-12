@@ -1,7 +1,20 @@
 # Testing strategy
 
 **Status:** In Design
-**Test evidence:** no application or test setup exists; no application tests were run for this documentation update.
+**Test evidence:** local UI tests exist and pass for the demo preview. No backend, authentication, ownership, persistence, or provider integration tests have been run.
+
+## Local frontend preview evidence (2026-11-12)
+
+| Check | Result | Scope |
+|---|---|---|
+| `npm run lint` | Passed (exit 0) | ESLint on `apps/web`; the selected ESLint 9.39.5 release is marked deprecated/unsupported by npm due current Next.js plugin peer ranges. |
+| `npm run typecheck` | Passed (exit 0) | `tsc --noEmit` on the frontend and tests. |
+| `npm test` | Passed: 3 test files, 6 tests | Request field validation, browser-only request preview, demo-notice text, and status label. |
+| `npm run build` | Passed (exit 0) | Next.js production build; static landing/dashboard/access/request routes and dynamic fixture project routes. |
+| Browser review | Reviewed at 390px viewport | Landing, dashboard, request, approval, and activity preview; approval actions disabled. Measured no horizontal overflow on the activity route. |
+| `npm audit` | 7 moderate; 0 high/critical | Development-only ESLint/TypeScript lint tree; unresolved, see Technology Registry. |
+
+These checks exercise only a local fixture-based interface. They do not satisfy any real M1 identity, owner, state transition, approval persistence, cancellation, audit, export/deletion, billing guard, or Catalyst acceptance criterion.
 
 ## Independent QA model
 

@@ -1,7 +1,7 @@
 # API documentation
 
 **Status:** In Design
-**API state:** proposed contract only; no endpoints are implemented or tested.
+**API state:** proposed contract only; no endpoints are implemented or tested. The local frontend's request preview does not call a server or API.
 
 ## Contract rules
 

@@ -1,13 +1,15 @@
 # AANTVYOG agent and contributor instructions
 
 ## Current status
-This repository is a documentation foundation, not an application implementation. It contains Git metadata and project documentation but no application source, dependency manifest, lockfile, app tests, or Catalyst configuration. On 2026-11-12 the founder approved the intended India region, invite-only authentication, and real persistence for core records; those decisions are not proof of account verification, implementation, or tests. Other architecture defaults remain proposals unless the decision register says otherwise.
+This repository contains project documentation and a local-only M1 frontend preview under `apps/web`. The preview uses static demo fixtures and browser-only request state; it has no real authentication, API, persistence, Catalyst configuration, or operational AI agents. It is not a connected product and does not satisfy the real M1 backend acceptance criteria. On 2026-11-12 the founder approved the intended India region, invite-only authentication, and real persistence for core records; those decisions are not proof of account verification, implementation, or tests. Catalyst service defaults remain proposals unless the decision register says otherwise.
 
 ## Authority and scope
 - The founder retains final authority over product vision, budget, paid services, major architecture, external integrations, production deployment, and company decisions.
 - ChatGPT may support strategy, research, and coordination. Codex may execute approved engineering work. Neither is a human employee, legal officer, or company representative.
 - Do not make irreversible decisions, activate paid services, create external accounts, deploy, or materially alter user data without required founder approval.
 - Routine local edits and non-destructive documentation work are within scope when they support an approved task.
+- The local Node.js 24.22.3 binary is side-by-side under the user's local toolchain directory. `apps/web/scripts/use-local-node.ps1` only prepends it to the current PowerShell process when dot-sourced; do not change system Node or machine-wide PATH.
+- Demo records must remain visibly identified as fixtures. Never describe the browser-only request preview as submitted, persisted, approved, owned by an authenticated user, or executed by an agent.
 - Preserve existing code and behavior. Do not configure external services or make real model calls as part of this foundation task.
 
 ## Work rules

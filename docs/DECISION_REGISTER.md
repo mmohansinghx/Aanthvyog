@@ -2,7 +2,7 @@
 
 **Last updated:** 2026-11-12
 **Scope:** M1 secure project and request lifecycle
-**Application state:** documentation only; no functional application, Catalyst project, or app tests exist.
+**Application state:** local-only Next.js frontend preview exists under `apps/web`; no connected authentication, API, persistence, Catalyst project, or operational agents exist.
 
 ## Status meanings
 
@@ -27,7 +27,7 @@ These are separate evidence states, not automatic steps. A decision may be Found
 
 | Area | Proposed default or constraint | Status | Technical check remaining | Implemented / tested |
 |---|---|---|---|---|
-| Frontend | Next.js App Router, TypeScript, Tailwind CSS | Proposed | Verify supported versions and build/deploy behavior under chosen Slate configuration. | No / no. |
+| Frontend | Next.js App Router, TypeScript, Tailwind CSS | Founder authorized local M1 scaffold on 2026-11-12; Catalyst deployment compatibility remains Proposed. | Local exact versions and build are verified; Slate account/hosting behavior remains unverified. | Local UI implemented and tested; see local-only evidence below. |
 | Frontend hosting | Evaluate Catalyst Slate | Proposed | Verify actual India account availability, build settings, routing, and usage limits. | No / no. |
 | Backend | Catalyst Functions with Node.js; Functions-first | Proposed | Verify Functions auth/session validation, execution/request limits, Data Store access, and supported runtime in selected DC. | No / no. |
 | AppSail | Exclude from M1 unless a documented technical requirement shows Functions cannot satisfy it. | Proposed constraint | Reassess only if an evidenced Functions gap arises. | Not selected. |
@@ -35,12 +35,26 @@ These are separate evidence states, not automatic steps. A decision may be Found
 | Account model | Individual account; one `owner_user_id` per project; server-side owner validation; workspace migration later. | Proposed implementation constraint | Verify server credentials, token claims, and data-access patterns preserve ownership. | No / no. |
 | AI/execution | No model calls, provider config, or generated-code execution in M1. | M1 exclusion | No integration evaluation for M1. | None / none. |
 
+## Local-only implementation authorization and evidence
+
+On 2026-11-12 the founder authorized a local-only frontend foundation, a side-by-side Node.js `24.22.3` runtime after official checksum verification, and local unit/component tests. The authorization excludes global Catalyst CLI installation, Catalyst initialization/login, remote Catalyst projects/tables/accounts, paid services, payment methods, overage, production deployment, fake authentication, live AI calls, and generated-code execution.
+
+| Work item | Implementation status | Test / verification status | Boundary |
+|---|---|---|---|
+| Next.js App Router, TypeScript, Tailwind scaffold | Implemented locally in `apps/web`; exact versions in `apps/web/package-lock.json`. | Tested by typecheck and successful production build. | No hosting/Catalyst connection. |
+| Landing, dashboard, request builder, project workspace, approval, activity, and access-status screens | Implemented with static fixtures and browser-only request preview. | Unit/component checks pass; mobile browser review at 390px; no horizontal overflow measured on the activity route. | UI is not account data; the preview request is not submitted or persisted. |
+| Authentication, server API, owner checks, persistence, lifecycle mutations, approval/audit writes | Not implemented. | Not tested. | No credential form, fake login, or database connection. |
+| Agent execution | Not implemented. | Not tested. | Agent activity explicitly shows no runs; no model/provider calls. |
+| Node.js `24.22.3` side-by-side runtime | Extracted under `%LOCALAPPDATA%\AANTVYOG\toolchains` after checking the official SHA-256 manifest; system Node and machine PATH unchanged. | `node --version` returned `v24.22.3`; `npm --version` returned `11.19.1`. | Current PowerShell process only when the local helper is dot-sourced. |
+| Local checks | `npm run lint`, `npm run typecheck`, `npm test`, `npm run build`. | Passed: lint 0, typecheck 0, 3 test files / 6 tests, production build 0. | These checks cover the preview, not backend acceptance criteria. |
+| Dependency security review | Lockfile installed; npm reports 7 moderate vulnerabilities in development-only lint/type tooling. | No high/critical advisories; findings remain unresolved and are documented in the technology registry. | Do not claim a clean audit. |
+
 ## Verified repository and local environment facts
 
 - The original documentation commit `18c5f24` is present on the local `main` branch and remote `origin/main`.
-- The repository contains documentation only. No package manifest, lockfile, test setup, `catalyst.json`, or `.catalystrc` was present at review.
+- At the initial repository review, the checkout contained documentation only; no package manifest, lockfile, test setup, `catalyst.json`, or `.catalystrc` was present then.
 - Local environment observed: Windows 11 Home Single Language (build 26300, 64-bit); Node.js `24.13.1`, npm `11.8.0`, Git `2.54.0.windows.1`; Catalyst CLI is not installed. Repository is clean at the founder-specified commit `6bc3f560e28c6f1850adae3b3daad40f59aceb4c`; 25.15 GiB was available on the repository volume.
-- Catalyst's security floor is Node.js `24.22.1+` or `22.23.4+`. The latest Node 24 LTS patch published as of 2026-11-12 is `24.22.3` (security release on Nov 11); local Node remains unchanged. Catalyst Slate currently supports Node 22 for framework apps; latest Node 22 patch is `22.23.5`, so local Node 24 and hosted Slate Node 22 require a compatibility check.
+- Catalyst's security floor is Node.js `24.22.1+` or `22.23.4+`. The latest Node 24 LTS patch published as of 2026-11-12 is `24.22.3` (security release on Nov 11); the system Node `24.13.1` remained unchanged, and a separate Node `24.22.3` binary is now available for this local app. Catalyst Slate currently supports Node 22 for framework apps; latest Node 22 patch is `22.23.5`, so local Node 24 and hosted Slate Node 22 require a compatibility check.
 - Catalyst CLI release notes list version `1.27.2` as the latest stable release as of this review. The current npm global prefix is user-scoped; no install was attempted.
 - No global tool install, Node update, Catalyst login/initialization, remote project creation, payment setup, production deployment, or test run occurred in this update.
 

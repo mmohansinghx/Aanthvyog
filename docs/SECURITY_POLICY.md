@@ -9,6 +9,13 @@
 - **Proposed controls:** Catalyst Authentication, server-side owner checks, least-privilege Catalyst Functions/Data Store access, audited lifecycle, and explicit usage ceilings.
 - India account selection, Catalyst service settings, and application controls are not implemented or verified.
 
+## Local preview boundary
+
+- `apps/web` is a local-only interface preview. The dashboard and workspace show static fixtures; the request form performs client-side validation and holds its preview only in component state.
+- The local preview has no login, invitation, session, API, database, project ownership, approval write, audit store, or agent execution. It must never be treated as an access-controlled application.
+- Do not enter personal, confidential, or sensitive information into the preview. Keep the development server bound to loopback; do not expose it on a shared/public interface.
+- The disabled approval buttons are presentation only; they do not record an approval or enforce an authorization policy. All protected controls still require server-side auth/ownership enforcement when a backend is separately authorized and implemented.
+
 ## Identity and access
 
 - No unrestricted public signup in M1. Invitation is controlled by an administrator through a verified provider-supported process.

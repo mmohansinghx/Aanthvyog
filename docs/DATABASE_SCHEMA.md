@@ -9,6 +9,7 @@
 - **Proposed platform:** Catalyst Data Store after region, schema, query, indexing, permission, and billing checks.
 - **Ownership:** individual account model; each project has one server-assigned owner. Workspaces/memberships are deferred.
 - These approvals do not mean a schema is technically verified, implemented, or tested.
+- The local M1 UI uses typed TypeScript fixtures in `apps/web/src/lib/demo-data.ts`; those objects are not database rows and are not persisted. No database, migration, or Catalyst Data Store connection exists.
 
 ## Data principles
 

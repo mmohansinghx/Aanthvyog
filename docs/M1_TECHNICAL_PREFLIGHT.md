@@ -2,7 +2,7 @@
 
 **Prepared:** 2026-11-12
 **Phase:** Environment readiness and implementation blueprint
-**Status:** Prepared for founder review; no application implementation, installation, Catalyst setup, database creation, or tests performed.
+**Status:** Historical preflight snapshot taken before the later 2026-11-12 local development authorization. The preflight itself made no application changes; current local implementation evidence is recorded in sections 9-10 and the README.
 
 ## 1. Environment audit
 
@@ -24,7 +24,7 @@ No machine/user name or local filesystem paths are included in this report.
 
 Catalyst's current security floor is Node.js `24.22.1+` or `22.23.4+`. Node.js `24.22.3` is the latest Node 24 LTS release published on 2026-11-11 and meets that floor. The local `24.13.1` is behind it. The official Node 24 archive associates npm `11.19.1` with the current v24.22.3 distribution. Next.js's documented minimum is Node `20.9`, so Node 24 satisfies the framework minimum.
 
-**Proposed safe method (not executed):** download the official Node.js v24.22.3 Windows x64 ZIP, verify its signed SHASUMS, extract it into a versioned user-writable directory, and prepend that directory only to a temporary PowerShell process PATH. This allows a side-by-side compatibility trial without replacing the installed Node or editing machine-wide PATH. Verify the resolved runtime with `node --version`, `npm --version`, and `Get-Command node,npm`; keep the current shell/system version untouched.
+**Proposal at preflight (later authorized and completed):** download the official Node.js v24.22.3 Windows x64 ZIP, verify its signed SHASUMS, extract it into a versioned user-writable directory, and prepend that directory only to a temporary PowerShell process PATH. This allows a side-by-side compatibility trial without replacing the installed Node or editing machine-wide PATH. Verify the resolved runtime with `node --version`, `npm --version`, and `Get-Command node,npm`; keep the system installation/PATH untouched.
 
 **Compatibility risk:** Catalyst Slate currently offers Node 22 for framework applications; its Next.js runtime executes Node while serving requests. Catalyst Functions documents Node 22 and 24. Use Node 24.22.3 locally for the CLI/Functions target, then test Next.js under Slate's supported patched Node 22 runtime (`22.23.5` is the current Node 22 LTS patch) before choosing the hosted runtime. Existing `firebase-tools` and pnpm should be rechecked in the isolated Node 24 shell. Do not update Node or install a version manager during this preflight.
 
@@ -55,7 +55,7 @@ Sources: [Catalyst CLI release notes](https://docs.catalyst.zoho.com/en/release-
 
 ## 4. Frontend implementation architecture
 
-**Proposed, not approved as a configured stack:** Next.js App Router, TypeScript strict mode, Tailwind CSS, and npm. Next's default scaffold supports TypeScript, Tailwind, ESLint, and App Router. The repository has no dependencies or app scaffold yet.
+**Proposal at preflight; local scaffold later authorized and implemented:** Next.js App Router, TypeScript strict mode, Tailwind CSS, and npm. Next's default scaffold supports TypeScript, Tailwind, ESLint, and App Router. See the dependency and implementation evidence in [Technology Registry](TECHNOLOGY_REGISTRY.md).
 
 Proposed routes:
 
@@ -183,13 +183,13 @@ Potential metered services: Functions compute, Data Store storage and reads/writ
 
 Sources: [Catalyst free-tier usage](https://catalyst.zoho.com/free-tier/), [Catalyst free-tier/billing FAQ](https://docs.catalyst.zoho.com/en/faq/general/), [Catalyst pay-as-you-go minimum billing](https://docs.catalyst.zoho.com/en/deployment-and-billing/billing/pay-as-you-go-model/).
 
-## 9. M1 coding sequence (proposed; not started)
+## 9. M1 coding sequence and current status
 
-1. Founder reviews this preflight and approves the local M1 coding scope. Keep remote integrations off.
-2. With separate permission, trial Node 24.22.3 side-by-side; verify CLI compatibility and existing Firebase/pnpm tools. Install the pinned Catalyst CLI only after permission and at an agreed scope.
-3. Scaffold Next.js App Router/TypeScript/Tailwind with npm; record versions and lockfile. No Catalyst files are hand-authored.
-4. Build the responsive, accessible shell and landing/dashboard/project/request/approval/activity screens using clearly labelled demo fixtures only.
-5. Implement version 1 domain contracts, runtime validation, state machine, structured errors, ownership policy, and append-only audit service interface; run unit tests when implementation is authorized.
+1. **Completed:** founder authorized local-only M1 frontend work on 2026-11-12. Remote integrations remain off.
+2. **Completed:** downloaded official Node.js 24.22.3 Windows x64 ZIP and verified SHA-256 `e612af99f626ab415ea225af6bce5c971feb448cb5cae250bb1c3fa50c5f7d9f` against the official release checksum. Extracted under `%LOCALAPPDATA%\AANTVYOG\toolchains\node-v24.22.3`; system Node and machine PATH were unchanged. Local runtime reports Node `24.22.3`, npm `11.19.1`. Catalyst CLI was not installed.
+3. **Completed:** scaffolded `apps/web` with Next.js App Router, TypeScript, Tailwind CSS, npm manifest/lockfile and recorded package purposes/licenses. No Catalyst files were authored.
+4. **Completed:** built responsive landing, dashboard, request-builder, workspace, approval, activity, and access-status screens with clearly labelled fixtures. The request form previews only in browser state; it is not submitted or persisted. Approval controls are disabled and the agent panel states that no agents run.
+5. **Not started:** real domain/API contracts, server-side validation, state machine, ownership enforcement, safe errors, and audit persistence. These require a separate implementation task and technical design before backend code.
 6. Verify account/DC, invite-only configuration, data residency, billing and quotas. Obtain explicit permission before CLI login or remote project initialization.
 7. Use official CLI to initialize Catalyst Development services in India, then verify Node runtime, Slate/Functions compatibility and no production routing. Create no Data Store tables until schema review and explicit approval.
 8. Configure Catalyst Authentication with public signup off; verify admin invite/recovery/expiry and test accounts before wiring authenticated routes.
@@ -205,10 +205,9 @@ Sources: [Catalyst free-tier usage](https://catalyst.zoho.com/free-tier/), [Cata
 **Still required or unresolved:**
 
 - Actual Zoho account/DC review and written component-level data residency check; account access/console verification has not been performed.
-- Explicit permission for the side-by-side Node 24.22.3 trial if treated as a software/environment change.
-- Explicit permission for global Catalyst CLI install; official Windows guide requests administrator mode, while the local npm prefix appears user-scoped.
+- Separate explicit permission for global Catalyst CLI installation; the local npm prefix appears user-scoped, but package scope and permission implications must be rechecked.
 - Explicit permission for Catalyst CLI login and remote Catalyst Development project initialization; no remote project can be created in this phase.
-- Founder review/approval of M1 local coding scope, design palette/accessibility target, proposed validation limits, and post-approval usage ceilings.
+- Review of the provisional design palette/accessibility target, server validation limits, and post-approval usage ceilings before backend implementation.
 - Review and approval of Data Store schema before creating tables; review actual billing/usage before any remote calls.
 
 No approval is requested or implied for payment method entry, paid subscription/API, overage, AI provider/model calls, generated-code execution, production deployment, or user-data import.
